@@ -1,0 +1,1 @@
+/Users/michael/gitrepos/kubernetes-in-production-examples/WASM/appexamples/rust/hello_world_guest/target/wasm32-unknown-unknown/release/hello_world_guest.wasm: /Users/michael/gitrepos/kubernetes-in-production-examples/WASM/appexamples/rust/hello_world_guest/src/lib.rs
