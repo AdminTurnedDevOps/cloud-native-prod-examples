@@ -1,5 +1,5 @@
 #[no_mangle]
-pub fn greet(ptr: i32, len: i32) {
+pub fn main(ptr: i32, len: i32) {
     let hello = "hello, ";
 
     let input_ptr = ptr as *mut u8;
