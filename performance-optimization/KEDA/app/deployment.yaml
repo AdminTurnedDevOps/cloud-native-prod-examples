@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pyweb
+spec:
+  selector:
+    matchLabels:
+      app: pyweb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pyweb
+    spec:
+      containers:
+      - name: pyweb
+        image: devopsthehardway.azurecr.io/pywebamd:latest
+        ports:
+        - containerPort: 5001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pyweb
+spec:
+  selector:
+    app: pyweb
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 5001
+  type: LoadBalancer
