@@ -1,0 +1,21 @@
+policies:
+  - name: find-all-resource-groups
+    resource: azure.resourcegroup
+
+  - name: find-virtual-machines
+    resource: azure.vm
+    description: find vms
+
+  - name: tag-virtual-machine
+    resource: azure.vm
+    description: tag vms
+    filters:
+      - type: instance-view
+        key: statuses[].code
+        op: in
+        value_type: swap
+        value: PowerState/running
+    actions:
+      - type: tag
+        tag: env
+        value: devtest
