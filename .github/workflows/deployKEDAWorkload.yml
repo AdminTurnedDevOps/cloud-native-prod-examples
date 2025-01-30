@@ -49,5 +49,5 @@ jobs:
           kubectl version --client
 
       # Deploy app
-      - name: Deploy Argo app
+      - name: Deploy KEDA Cron Job
         run: kubectl apply -f performance-optimization/KEDA/keda-k8s-manifest/scale.yaml

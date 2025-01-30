@@ -26,3 +26,9 @@
 2. Walk through and run the Manifest in the **keda-k8s-manifest**directory
 3. Deploy the Manifest
 4. Refresh the Azure portal and the new config will be shown
+
+## CICD
+
+Create: https://github.com/AdminTurnedDevOps/cloud-native-prod-examples/blob/main/.github/workflows/deployKEDAWorkload.yml
+
+Delete: https://github.com/AdminTurnedDevOps/cloud-native-prod-examples/blob/main/.github/workflows/deleteKEDACron.yml
