@@ -10,5 +10,6 @@ If KEDA is not enabled already, you'll see a blue button that says **Enabled KED
 2. Click the blue **+ Create** button
 3. Choose your workload
 4. Under trigger type, choose Cron.
-5. Set the min replicas to `0` and the max to `3`
-6. Specify a time that's 2 minutes from what time it is now so you can see the scale occur
+5. Set the min replicas to `1` and the max to `4`
+6. Specify a day (today) and a time that's 2 minutes from what time it is now so you can see the scale occur
+7. Run `kubectl get pods --watch` to see the increase
