@@ -7,15 +7,13 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: pyweb
+  minReplicaCount: 1
+  maxReplicaCount: 4
   triggers:
-triggers:
   - type: cron
     metadata:
       timezone: America/New_York
       # Timezone codes: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
       start: 0 6 * * * # At 6:00 AM
       end: 0 20 * * * # At 8:00 PM
-      desiredReplicas: "10"
-    idleReplicaCount: 0
-    minReplicaCount: 2
-    maxReplicaCount: 6
+      desiredReplicas: "3"

@@ -22,4 +22,7 @@
 
 ## Manifest
 
-1. Walk through and run the Manifest in the **keda-k8s-manifest**directory
+1. Delete the existing cron job via the Azure portal
+2. Walk through and run the Manifest in the **keda-k8s-manifest**directory
+3. Deploy the Manifest
+4. Refresh the Azure portal and the new config will be shown
