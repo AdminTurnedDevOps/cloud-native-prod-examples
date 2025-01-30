@@ -1,4 +1,4 @@
-name: Build and deploy an app to AKS
+name: KEDA Cron Job
 
 on:
   workflow_dispatch:
