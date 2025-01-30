@@ -1,0 +1,53 @@
+name: Build and deploy an app to AKS
+
+on:
+  workflow_dispatch:
+
+env:
+  RESOURCE_GROUP: "devrelasaservice"
+  CLUSTER_NAME: "aksenvironment01"
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checks out the repository this file is in
+      - uses: actions/checkout@v4
+
+      # Logs in with your Azure credentials
+      - name: Azure login
+        uses: azure/login@v1.4.6
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Use kubelogin to configure your kubeconfig for Azure auth
+      - name: Set up kubelogin for non-interactive login
+        uses: azure/use-kubelogin@v1
+        with:
+          kubelogin-version: 'v0.0.25'
+
+      # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
+      - name: Get K8s context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: ${{ env.RESOURCE_GROUP }}
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          admin: 'false'
+          use-kubelogin: 'true'
+
+      # Install Kubectl
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+          echo "$(<kubectl.sha256) kubectl" | sha256sum --check
+
+          sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+          
+          kubectl version --client
+
+      # Deploy app
+      - name: Deploy Argo app
+        run: kubectl apply -f performance-optimization/KEDA/keda-k8s-manifest/scale.yaml
