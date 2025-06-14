@@ -1,0 +1,64 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: datadog-mgmt
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: datadog
+    repoURL: https://helm.datadoghq.com
+    targetRevision: 3.110.12
+    helm:
+      releaseName: datadog
+      parameters:
+        - name: datadog.site
+          value: datadoghq.com
+        - name: datadog.clusterName
+          value: aksnevironment01
+        - name: datadog.clusterAgent.replicas
+          value: '2'
+        - name: datadog.clusterAgent.createPodDisruptionBudget
+          value: 'true'
+        - name: datadog.kubeStateMetricsEnabled
+          value: 'true'
+        - name: datadog.kubeStateMetricsCore.enabled
+          value: 'true'
+        - name: datadog.logs.enabled
+          value: 'true'
+        - name: datadog.logs.containerCollectAll
+          value: 'true'
+        - name: datadog.apiKey
+          value: 
+        - name: datadog.processAgent.enabled
+          value: 'true'
+        - name: targetSystem
+          value: linux
+        - name: datadog.cws.enabled
+          value: 'true'
+        - name: datadog.cspm.enabled
+          value: 'true'
+        - name: datadog.cspm.hostBenchmarks.enabled
+          value: 'true'
+        - name: datadog.securityAgent.runtime.enabled
+          value: 'true'
+        - name: datadog.securityAgent.compliance.enabled
+          value: 'true'
+        - name: datadog.securityAgent.compliance.host_benchmarks.enabled
+          value: 'true'
+        - name: datadog.sbom.enabled
+          value: 'true'
+        - name: datadog.sbom.containerImage.enabled
+          value: 'true'
+        - name: datadog.sbom.host.enabled
+          value: 'true'
+        - name: datadog.remoteConfiguration.enabled
+          value: 'true'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: datadog
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+ 
