@@ -1,0 +1,16 @@
+{
+	"mcpServers": {
+		"awslabs.eks-mcp-server": {
+			"command": "uvx",
+			"args": [
+                "awslabs.eks-mcp-server",
+                "--allow-write"
+            ],
+			"env": {
+				"AWS_PROFILE": "default",
+                "AWS_REGION": "us-west-2",
+                "FASTMCP_LOG_LEVEL": "INFO"
+			}
+		}
+	}
+}
