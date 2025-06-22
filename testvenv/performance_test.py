@@ -50,6 +50,7 @@ def time_command(command, description, cwd=None):
         print(f"Error: {e}")
         return None
 
+
 def test_venv_creation():
     print("\n" + "="*60)
     print("VIRTUAL ENVIRONMENT CREATION TEST")
